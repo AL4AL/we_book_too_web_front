@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+.home-page-container {
+    background-image: url('/images/alternating-arrowhead.svg');
+    background-repeat: repeat;
+    width: 100%;
+
+}
+
+@supports (height: 100svh) {
+    .home-page-container {
+        height: 100svh;
+    }
+}
+
+@supports not (height: 100svh) {
+    .home-page-container {
+        height: 100vh;
+    }
+}
