@@ -1,10 +1,8 @@
 @import "tailwindcss";
 
 .home-page-container {
-    background-image: url('/images/alternating-arrowhead.svg');
-    background-repeat: repeat;
-    width: 100%;
-
+    position: relative;
+    overflow: hidden;
 }
 
 @supports (height: 100svh) {

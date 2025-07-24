@@ -7,7 +7,7 @@ export interface NavigationBarProps {
 
 export default function NavigationBar({className}: NavigationBarProps) {
 	return (
-		<div className={`bg-gray-100 py-2 w-full flex flex-row justify-around m-1 rounded-sm ${className}`}>
+		<div className={`bg-gray-100 py-2 sm:py-4 2xl:py-5 w-full lg:w-3/5 xl:w-1/2 sm:w-3/4 sm:mx-auto mb-3 flex flex-row justify-around m-1 rounded-sm ${className}`}>
 			<NavigationBarButton>
 				<HomeIcon className={'size-6'} />
 			</NavigationBarButton>
