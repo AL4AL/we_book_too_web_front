@@ -35,6 +35,7 @@ const port = getValidatedPort();
 const pathname = getOptionalPathname();
 
 const nextConfig: NextConfig = {
+  reactStrictMode: true,
   images: {
     remotePatterns: [
       {
