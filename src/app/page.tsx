@@ -25,7 +25,7 @@ export default async function Home() {
 	const featured = await fetchFeaturedProviders();
 
 	return (
-		<div className="home-page-container relative min-h-screen bg-white">
+		<div className="home-page-container relative min-h-screen">
 			<HomePageBackground />
 			<main className="relative z-10 pb-24">
 				<section className="w-full flex flex-col items-center pt-8 pb-4 px-4">
