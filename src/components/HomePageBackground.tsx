@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 // Image configurations based on Tailwind breakpoints
 const imageConfigs = {
 	base: {
@@ -20,9 +18,7 @@ const imageConfigs = {
 } as const;
 
 export default function HomePageBackground() {
-	// Build the image URL for the base configuration
-	const imageUrl = `${process.env.BACK_END_BASE_URL}/${imageConfigs.base.src}`;
-	
+
 	return (
 		<div className="fixed inset-0 -z-10 w-full h-full">
 			<picture>
@@ -38,13 +34,11 @@ export default function HomePageBackground() {
 					srcSet={`${process.env.BACK_END_BASE_URL}/${imageConfigs.sm.src}`}
 				/>
 				{/* Base image (fallback) */}
-				<Image 
-					src={imageUrl}
+				<img 
+					src={`${process.env.BACK_END_BASE_URL}/${imageConfigs.base.src}`}
 					alt="Background image"
-					fill={true}
-					objectFit={'cover'}
-					priority={true}
-					quality={85}
+					className="w-full h-full object-cover"
+					loading="eager"
 				/>
 			</picture>
 		</div>
