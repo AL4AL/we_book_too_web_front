@@ -3,27 +3,30 @@ import HomePageBackground from '@/components/HomePageBackground'
 import Banner from '@/components/Banner';
 import ServicesGrid from '@/components/ServicesGrid';
 import FeaturedProviders from '@/components/FeaturedProviders';
+import axiosClient from '@/utils/axios'
+import { headers } from 'next/headers'
 
 async function fetchServices() {
-	const res = await fetch(`${process.env.BACK_END_BASE_URL}/services`);
-	if (!res.ok) {
-		return [];
-	}
-	return res.json();
+
+	const res = await axiosClient.get('/api/v1/catalog/services');
+
+	return res.data.data;
 }
 
 async function fetchFeaturedProviders() {
-	const res = await fetch(`${process.env.BACK_END_BASE_URL}/featured`);
-	if (!res.ok) {
-		return [];
-	}
-	return res.json();
+	const res = await axiosClient.get('/api/v1/catalog/featured', {
+		headers: {
+			'referer': (await headers()).get('host'),
+		},
+	});
+	// todo handle failure case
+	return res.data.data;
 }
 
 export default async function Home() {
+	axiosClient.defaults.headers.common['referer'] = (await headers()).get('host');
 	const services = await fetchServices();
 	const featured = await fetchFeaturedProviders();
-
 	return (
 		<div className="home-page-container relative min-h-screen">
 			<HomePageBackground />
@@ -32,9 +35,9 @@ export default async function Home() {
 					<Banner />
 				</section>
 
-				<ServicesGrid services={services} />
+				<ServicesGrid services={services} isLoading={false}/>
 
-				<FeaturedProviders featured={featured} />
+				<FeaturedProviders featured={featured} isLoading={false} />
 
 				<div className="block fixed bottom-0 w-full z-20">
 					<BottomNavigation />

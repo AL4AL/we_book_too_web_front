@@ -3,22 +3,26 @@ import Link from 'next/link';
 
 type Service = { id: number; name: string; icon: string };
 
-export default function ServicesGrid({ services }: { services: Service[] }) {
+export default function ServicesGrid({ services, isLoading }: { services: Service[], isLoading: boolean }) {
 	const visibleServices = services.slice(0, 5);
 
 	return (
 		<section className="mt-6 px-4">
 			<h2 className="text-lg font-semibold mb-3">Services</h2>
 			<div className="grid grid-cols-5 gap-4">
-				{services.length === 0 ? (
+				{isLoading ? (
 					<div className="col-span-5 text-center text-gray-400">Loading...</div>
 				) : (
-					visibleServices.map(service => (
+					visibleServices.length === 0 ? (
+						<div className="col-span-5 text-center text-gray-400">No services are available</div>
+					) : (
+						visibleServices.map(service => (
 						<div key={service.id} className="flex flex-col items-center bg-gray-50 rounded-lg p-3 shadow-sm">
 							<span className="text-2xl mb-1">{service.icon}</span>
 							<span className="text-xs font-medium text-gray-700">{service.name}</span>
 						</div>
 					))
+					)
 				)}
 			</div>
 			{services.length > 5 && (
